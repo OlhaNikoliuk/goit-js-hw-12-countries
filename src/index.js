@@ -36,11 +36,11 @@ function renderCountriesMarkup(data) {
   refs.countryContainer.innerHTML = '';
   if (searchQuery === ' ') {
     return
-  } else if (data.length < 10 && data.length > 1) {
+  } else if (data && data.length < 10 && data.length > 1) {
     refs.countryContainer.insertAdjacentHTML('beforeend', countriesListTemp(data))
-  } else if (data.length === 1) {
+  } else if (data && data.length === 1) {
     refs.countryContainer.insertAdjacentHTML('beforeend', countryTemp(data[0]))
-  } else if (data.length > 10) {
+  } else if (data && data.length > 10) {
     alert({
       type: 'error',
       text: 'To many matches found. Please enter a more specific query!',
