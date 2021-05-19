@@ -22,18 +22,21 @@ const refs = {
 
 refs.input.addEventListener('input', debounce(countrySearch, 500))
 
+let searchQuery = '';
 
-function countrySearch() {
-  let searchQuery = refs.input.value;
+function countrySearch(e) {
+  e.preventDefault();
+  searchQuery = refs.input.value;
   fetchCountries(searchQuery);
 }
 
 
 function renderCountriesMarkup(data) {
-  refs.input.value = '';
+
   refs.countryContainer.innerHTML = '';
-  
-  if (data.length < 10 && data.length > 1) {
+  if (searchQuery === ' ') {
+    return
+  } else if (data.length < 10 && data.length > 1) {
     refs.countryContainer.insertAdjacentHTML('beforeend', countriesListTemp(data))
   } else if (data.length === 1) {
     refs.countryContainer.insertAdjacentHTML('beforeend', countryTemp(data[0]))
